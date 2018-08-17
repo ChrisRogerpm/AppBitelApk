@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">Conectate Bitel</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="principal">Principal</string>
+    <string name="consultas">Consultas</string>
+    <string name="cuenta">Cuenta</string>
+    <string name="imagen_adjunta">Imagen Adjunta</string>
+    <string name="recargar_saldo">Recargar Saldo</string>
+    <string name="monto_saldo">Monto Saldo</string>
+    <string name="sucursal">Sucursal</string>
+    <string name="escaner">Escaner/Foto</string>
+    <string name="recarga_de_saldo">Recarga de Saldo</string>
+    <string name="conectatebitel">http://www.conectatebitel.com/</string>
+</resources>
