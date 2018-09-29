@@ -82,7 +82,6 @@ public class ScannerFragment extends Fragment implements View.OnClickListener,Lo
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_scanner, container, false);
 
         GPSEnable();
@@ -169,7 +168,7 @@ public class ScannerFragment extends Fragment implements View.OnClickListener,Lo
             IntentResult scanningResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
             contenido_qr = scanningResult.getContents();
             formato_qr = scanningResult.getFormatName();
-            editText_sucursal.setText(ObtenerSucursalId(contenido_qr));
+            editText_sucursal.setText(ObtenerSucursalNombre(contenido_qr));
             locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 0,this);
 
             progressDialog = new ProgressDialog(getActivity());
@@ -194,6 +193,10 @@ public class ScannerFragment extends Fragment implements View.OnClickListener,Lo
     public String  ObtenerSucursalId(String sucursal_id){
         String[] id_sucursal = sucursal_id.split("-");
         return id_sucursal[1];
+    }
+    public String  ObtenerSucursalNombre(String sucursal_id){
+        String[] id_sucursal = sucursal_id.split("-");
+        return id_sucursal[0];
     }
 
     public boolean SesionActiva() {
@@ -266,14 +269,17 @@ public class ScannerFragment extends Fragment implements View.OnClickListener,Lo
     }
 
     private void EnviarDatoWebServices(final int usuario_id,final double monto, final double latitud, final double longitud, final String id_sucursal, final String foto_adjunta) {
-
+        progressDialog = new ProgressDialog(getActivity());
+        progressDialog.setTitle("Enviando Pago");
+        progressDialog.setMessage("Cargando...");
+        progressDialog.show();
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_RECARGA,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         if(response.equals("success")){
+                            progressDialog.dismiss();
                             Intent intent = new Intent(getActivity(), MainActivity.class);
-                            //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                             startActivity(intent);
                             Toast.makeText(getActivity(), "Se ha subido con exito", Toast.LENGTH_SHORT).show();
                         }
@@ -309,10 +315,6 @@ public class ScannerFragment extends Fragment implements View.OnClickListener,Lo
         };
 
         RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
-//        stringRequest.setRetryPolicy(new DefaultRetryPolicy(
-//                10000,
-//                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
-//                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         requestQueue.add(stringRequest);
     }
 
