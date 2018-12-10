@@ -12,6 +12,8 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+
+import com.dev.christian.app.Pkg_Fragment.ArchivoFragment;
 import com.dev.christian.app.Pkg_Fragment.ConsultFragment;
 import com.dev.christian.app.Pkg_Fragment.ProfileFragment;
 import com.dev.christian.app.Pkg_Fragment.ScannerFragment;
@@ -23,7 +25,7 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private boolean Logeado = false;
-    public static String HOST = "http://www.conectatebitel.com";
+    public static String HOST = "http://conectatebitel.com";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,8 +75,10 @@ public class MainActivity extends AppCompatActivity
                 fragment = new ConsultFragment();
                 break;
             case R.id.nav_account:
-                //fragment = new SesionFragment();
                 VerificarSesion();
+                break;
+            case R.id.nav_archivo_account:
+                fragment = new ArchivoFragment();
                 break;
         }
         if (fragment != null) {

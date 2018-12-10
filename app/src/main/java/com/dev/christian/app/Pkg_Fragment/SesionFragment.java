@@ -84,15 +84,17 @@ public class SesionFragment extends Fragment implements View.OnClickListener {
                             e.printStackTrace();
                         }
 
-                        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("InicioSesion", Context.MODE_PRIVATE);
-                        SharedPreferences.Editor editor = sharedPreferences.edit();
-                        editor.putBoolean("Logeado", true);
-                        editor.putString("id_usuario", id_usuario);
-                        editor.apply();
-
-                        Intent intent = new Intent(getActivity(), MainActivity.class);
-                        //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                        startActivity(intent);
+                        if(id_usuario.isEmpty()){
+                            Toast.makeText(getActivity(), "Los datos ingresados no coinciden con nuestros registros, vuelva a intentarlo", Toast.LENGTH_SHORT).show();
+                        }else{
+                            SharedPreferences sharedPreferences = getActivity().getSharedPreferences("InicioSesion", Context.MODE_PRIVATE);
+                            SharedPreferences.Editor editor = sharedPreferences.edit();
+                            editor.putBoolean("Logeado", true);
+                            editor.putString("id_usuario", id_usuario);
+                            editor.apply();
+                            Intent intent = new Intent(getActivity(), MainActivity.class);
+                            startActivity(intent);
+                        }
                     }
                 },
                 new Response.ErrorListener() {

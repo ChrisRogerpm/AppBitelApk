@@ -61,14 +61,23 @@ public class ConsultFragment extends Fragment implements View.OnClickListener {
         return v;
     }
 
+    public int ObtenerUsuarioLogeadoId() {
+        int id = 0;
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("InicioSesion", Context.MODE_PRIVATE);
+        id = Integer.parseInt(sharedPreferences.getString("id_usuario", "0"));
+        return id;
+    }
+
     private void BuscarPDV() {
 
         final String codigpdv = editText_codigo.getText().toString().trim();
-
+        final String IdUsuario = String.valueOf(ObtenerUsuarioLogeadoId());
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_CONSULTA,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
+
+                        
 
                         String Nombre_PDV;
                         String Saldo;
@@ -96,6 +105,7 @@ public class ConsultFragment extends Fragment implements View.OnClickListener {
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
                 params.put("codigo_pdv", codigpdv);
+                params.put("IdUsuario", IdUsuario);
                 return params;
             }
 

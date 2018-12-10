@@ -19,4 +19,8 @@
     <string name="escaner">Escaner/Foto</string>
     <string name="recarga_de_saldo">Recarga de Saldo</string>
     <string name="conectatebitel">http://www.conectatebitel.com/</string>
+    <string name="nombre_de_archivo_gps">Nombre de Archivo GPS</string>
+    <string name="generar_archivo_gps">Generar Archivo GPS</string>
+    <string name="ArchivoGPS">Archivo GPS</string>
+    <string name="activar_gps">Activar GPS</string>
 </resources>

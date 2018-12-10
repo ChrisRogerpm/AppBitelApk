@@ -277,13 +277,20 @@ public class ScannerFragment extends Fragment implements View.OnClickListener,Lo
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        if(response.equals("success")){
+
+                        boolean respuesta = false;
+                        try {
+                            JSONObject jsonResponse = new JSONObject(response);
+                            respuesta = jsonResponse.getBoolean("respuesta");
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        if (respuesta) {
                             progressDialog.dismiss();
                             Intent intent = new Intent(getActivity(), MainActivity.class);
                             startActivity(intent);
                             Toast.makeText(getActivity(), "Se ha subido con exito", Toast.LENGTH_SHORT).show();
-                        }
-                        else{
+                        }else{
                             Toast.makeText(getActivity(), "Ah ocurrido un error inesperado, revise nuevamente", Toast.LENGTH_SHORT).show();
                         }
                     }
